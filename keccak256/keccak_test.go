@@ -21,3 +21,15 @@ func TestKeccakShort256(t *testing.T) {
 		}
 	}
 }
+
+func TestKeccakLong256(t *testing.T) {
+	h := newKeccak256()
+	for i := range tstLong {
+		h.Reset()
+		h.Write(tstLong[i].msg)
+		d := h.Sum(nil)
+		if !bytes.Equal(d, tstLong[i].output) {
+			t.Errorf("testcase Long256 %d: expected %x got %x", i, tstLong[i].output, d)
+		}
+	}
+}
